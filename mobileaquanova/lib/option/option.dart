@@ -5,11 +5,11 @@ class Option {
   final String subtitle;
   final String value;
   final String unit;
-  final String status;
   final Color color;
   final String minValue;
   final String maxValue;
-  final String currentState;  
+  final String currentState; 
+  final Color statusColor; 
   final String routeName;
   final String iconTitle;
   final String iconValue;
@@ -28,11 +28,11 @@ class Option {
     this.subtitle = '',
     this.value = '',
     this.unit = '',
-    this.status = '',
     required this.color,
     this.minValue = '',
     this.maxValue = '',
     this.currentState = '',
+    this.statusColor = Colors.transparent,
     this.routeName = '',
     this.iconTitle = '',
     this.iconValue = '',

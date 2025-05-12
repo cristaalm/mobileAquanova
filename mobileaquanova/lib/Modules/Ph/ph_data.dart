@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:mobileaquanova/assets/resources/colors.dart';
-import 'package:mobileaquanova/option.dart';
+import 'package:mobileaquanova/option/option.dart';
 
 /// pH module data
 class PhData {// Methods to determine status based on pH value
@@ -10,11 +11,13 @@ class PhData {// Methods to determine status based on pH value
   /// [value] is the pH value to evaluate.
   /// [rangoMin] is the minimum value of the range.
   /// [rangoMax] is the maximum value of the range.
-  static String getStatusForValue(double value, double rangoMin, double rangoMax) {
-    if (value < rangoMin) return "Ácido";
-    if (value < rangoMax) return "Alcalino";
-    return "Óptimo";
+
+  static ({String status, Color color}) getStatusForValue(double value, double rangoMin, double rangoMax) {
+    if (value < rangoMin) return (status: "Ácido", color: ColorsAquanova.blue);
+    if (value > rangoMax) return (status: "Alcalino", color: ColorsAquanova.red);
+    return (status: "Óptimo", color: ColorsAquanova.green);
   }
+  
   static Option getOption() {
     final String value = "6.8";
     final String rangoMin = "6.5";
@@ -30,10 +33,13 @@ class PhData {// Methods to determine status based on pH value
       rangoMin: rangoMin,
       rangoMax: rangoMax,
       currentState: getStatusForValue(
-        double.parse(value), 
-        double.parse(rangoMin), 
-        double.parse(rangoMax)
-      ),
+            double.parse(value),
+            double.parse(rangoMin),
+            double.parse(rangoMax)).status,
+        statusColor: getStatusForValue(
+          double.parse(value),
+            double.parse(rangoMin),
+            double.parse(rangoMax)).color,
       routeName: '/ph',
       iconTitle: 'lib/assets/icons/ph/ph_icon.png',
       iconValue: 'lib/assets/icons/ph/ph_icon.png',

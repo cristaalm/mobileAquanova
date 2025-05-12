@@ -1,10 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:mobileaquanova/assets/resources/colors.dart';
-import 'package:mobileaquanova/option.dart';
-import 'package:mobileaquanova/options_factory.dart';
-import 'package:mobileaquanova/option_card.dart';
+import 'package:mobileaquanova/option/option.dart';
+import 'package:mobileaquanova/option/options_factory.dart';
+import 'package:mobileaquanova/option/option_card.dart';
 import 'package:mobileaquanova/Modules/modules.dart';
-
+import 'package:mobileaquanova/login/login_card.dart';
 
 void main() {
   runApp(const AquanovaApp());
@@ -21,9 +23,9 @@ class AquanovaApp extends StatelessWidget {
         primaryColor: ColorsAquanova.backgroundMedium,
         scaffoldBackgroundColor: ColorsAquanova.backgroundLight,
       ),
-      home: const Home(),
-      // Named routes para pantallas de detalle usando los módulos
+      home: const LoginScreen(),
       routes: {
+        '/home': (context) => const Home(),
         '/water-temp': (context) {
           final option = ModalRoute.of(context)!.settings.arguments as Option;
           return WaterTempModule(option: option);
@@ -99,6 +101,16 @@ class _HomeState extends State<Home> {
           ),
         ),
         backgroundColor: ColorsAquanova.backgroundMedium,
+        actions: [ 
+          IconButton(
+            icon: const Icon(Icons.exit_to_app, color: ColorsAquanova.darkLetters, size: 30),
+            onPressed: () { 
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const LoginScreen())
+              );
+            },
+          ),
+        ],
       ),
       backgroundColor: ColorsAquanova.backgroundLight,
       body: SafeArea(

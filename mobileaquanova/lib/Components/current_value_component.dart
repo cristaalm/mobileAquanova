@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileaquanova/assets/resources/colors.dart';
-import 'package:mobileaquanova/option.dart';
+import 'package:mobileaquanova/option/option.dart';
 
 class CurrentValueComponent extends StatelessWidget {
   final Option option;
@@ -86,8 +86,8 @@ class CurrentValueComponent extends StatelessWidget {
                         padding: const EdgeInsets.all(12),
                         child: Image.asset(
                           option.iconValue,
-                          width: 60,
-                          height: 60,
+                          width: 50,
+                          height: 50,
                           color: option.color,
                         ),
                       ),
@@ -99,7 +99,7 @@ class CurrentValueComponent extends StatelessWidget {
                             Text(
                               option.value,
                               style: TextStyle(
-                                fontSize: 72.0,
+                                fontSize: 62.0,
                                 fontWeight: FontWeight.bold,
                                 color: option.color,
                               ),

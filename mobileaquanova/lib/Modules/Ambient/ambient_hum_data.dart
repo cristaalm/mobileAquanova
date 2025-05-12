@@ -1,14 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:mobileaquanova/assets/resources/colors.dart';
-import 'package:mobileaquanova/option.dart';
+import 'package:mobileaquanova/option/option.dart';
 
 /// pH module data
 class AmbientHumData {
 
-  static String getStatusForValue(double value, double rangoMin, double rangoMax) {
-    if (value < rangoMin) return "Baja";
-    if (value > rangoMax) return "Alta";
-    return "Normal";
+  static ({String status, Color color}) getStatusForValue(double value, double rangoMin, double rangoMax) {
+    if (value < rangoMin) return (status: "Baja", color: ColorsAquanova.blue);
+    if (value > rangoMax) return (status: "Alta", color: ColorsAquanova.red);
+    return (status: "Normal", color: ColorsAquanova.green);
   }
+  
   static Option getOption() {
     final String value = "55";
     final String rangoMin = "50";
@@ -25,10 +27,13 @@ class AmbientHumData {
       rangoMin: rangoMin,
       rangoMax: rangoMax,
       currentState: getStatusForValue(
-        double.parse(value), 
-        double.parse(rangoMin), 
-        double.parse(rangoMax)
-      ),
+            double.parse(value),
+            double.parse(rangoMin),
+            double.parse(rangoMax)).status,
+        statusColor: getStatusForValue(
+          double.parse(value),
+            double.parse(rangoMin),
+            double.parse(rangoMax)).color,
       routeName: '/ambient-humidity',
       iconTitle: 'lib/assets/icons/ambienthum/gota.png',
       iconValue: 'lib/assets/icons/ambienthum/nube.png',

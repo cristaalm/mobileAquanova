@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileaquanova/Modules/base_module.dart';
-import 'package:mobileaquanova/option.dart';
+import 'package:mobileaquanova/option/option.dart';
 import 'package:mobileaquanova/Modules/Ambient/ambient_temp_data.dart';
 import 'package:mobileaquanova/Modules/Ambient/ambient_hum_data.dart';
 

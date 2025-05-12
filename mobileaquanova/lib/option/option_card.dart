@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileaquanova/assets/resources/colors.dart';
-import 'package:mobileaquanova/option.dart';
+import 'package:mobileaquanova/option/option.dart';
 
 class OptionCard extends StatelessWidget {
   final Option option;

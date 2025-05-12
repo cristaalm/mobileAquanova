@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobileaquanova/assets/resources/colors.dart';
-import 'package:mobileaquanova/option.dart';
-import 'package:mobileaquanova/Modules/Components/current_value_component.dart';
-import 'package:mobileaquanova/Modules/Components/limits_component.dart';
-import 'package:mobileaquanova/Modules/Components/graph_component.dart';
-import 'package:mobileaquanova/Modules/Components/table_component.dart';
+import 'package:mobileaquanova/option/option.dart';
+import 'package:mobileaquanova/Components/current_value_component.dart';
+import 'package:mobileaquanova/Components/limits_component.dart';
+import 'package:mobileaquanova/Components/graph_component.dart';
+import 'package:mobileaquanova/Components/table_component.dart';
 
 class BaseModule extends StatefulWidget {
   final Option option;
@@ -91,7 +91,7 @@ class _BaseModuleState extends State<BaseModule> {
               const SizedBox(height: 16.0),
 
               // Gráfica
-              Container(
+              SizedBox(
                 height: 350, // Fixed height for the graph card
                 child: GraphComponent(
                   option: widget.option,

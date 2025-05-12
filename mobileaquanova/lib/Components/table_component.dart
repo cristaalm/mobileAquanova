@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileaquanova/assets/resources/colors.dart';
-import 'package:mobileaquanova/option.dart';
+import 'package:mobileaquanova/option/option.dart';
 
 class TableComponent extends StatefulWidget {
   final Option option;
@@ -33,7 +33,7 @@ class _TableComponentState extends State<TableComponent> {
     return widget.historicalData.where((entry) {
       final timestamp = entry['timestamp'] as String;
       final value = entry['value'] as String;
-      final status = _getStatusForValue(value);
+      final status = widget.option.currentState;
       
       return timestamp.toLowerCase().contains(_searchQuery.toLowerCase()) ||
              value.toLowerCase().contains(_searchQuery.toLowerCase()) ||
@@ -79,28 +79,6 @@ class _TableComponentState extends State<TableComponent> {
     super.dispose();
   }
 
-  // Get status text for a specific value
-  String _getStatusForValue(String valueStr) {
-    try {
-      final value = double.parse(valueStr.replaceAll(',', '.'));
-      final minValue = double.parse(
-        widget.option.minValue.replaceAll(',', '.'),
-      );
-      final maxValue = double.parse(
-        widget.option.maxValue.replaceAll(',', '.'),
-      );
-
-      if (value > maxValue) {
-        return "Alto";
-      } else if (value < minValue) {
-        return "Bajo";
-      } else {
-        return "Óptimo";
-      }
-    } catch (e) {
-      return "Óptimo";
-    }
-  }
 
   // Get status icon for a specific value
   String _getStatusIconForValue(String valueStr) {
@@ -179,7 +157,7 @@ class _TableComponentState extends State<TableComponent> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Icon(
                           Icons.search,
                           color: ColorsAquanova.lightGrey,
@@ -215,7 +193,7 @@ class _TableComponentState extends State<TableComponent> {
 
             // Encabezado de la tabla
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
               decoration: BoxDecoration(
                 color: ColorsAquanova.progressColor,
                 borderRadius: BorderRadius.only(
@@ -303,14 +281,9 @@ class _TableComponentState extends State<TableComponent> {
                               final entry = paginatedData[index];
                               final timestamp = entry['timestamp'] as String;
                               final value = entry['value'] as String;
-                              final status = _getStatusForValue(value);
-                              final statusIcon = _getStatusIconForValue(value);
-                              final color =
-                                  status == "Alto"
-                                      ? ColorsAquanova.red
-                                      : status == "Bajo"
-                                      ? ColorsAquanova.blue
-                                      : ColorsAquanova.green;
+                              final status = widget.option.currentState;
+                            final statusIcon = _getStatusIconForValue(value);
+                              final color = widget.option.statusColor;
 
                               return Container(
                                 decoration: BoxDecoration(
@@ -329,12 +302,12 @@ class _TableComponentState extends State<TableComponent> {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 12,
-                                    horizontal: 16,
+                                    horizontal: 3,
                                   ),
                                   child: Row(
                                     children: [
                                       Expanded(
-                                        flex: 2,
+                                        flex: 4,
                                         child: Text(
                                           timestamp,
                                           style: TextStyle(
@@ -344,7 +317,7 @@ class _TableComponentState extends State<TableComponent> {
                                         ),
                                       ),
                                       Expanded(
-                                        flex: 1,
+                                        flex: 2,
                                         child: Center(
                                           child: Row(
                                             mainAxisAlignment:
@@ -352,10 +325,10 @@ class _TableComponentState extends State<TableComponent> {
                                             children: [
                                               Image.asset(
                                                 widget.option.iconValue,
-                                                width: 16,
-                                                height: 16,
+                                                width: 15,
+                                                height: 25,
                                               ),
-                                              const SizedBox(width: 8),
+                                              const SizedBox(width: 3),
                                               Text(
                                                 value,
                                                 style: TextStyle(
@@ -369,7 +342,7 @@ class _TableComponentState extends State<TableComponent> {
                                         ),
                                       ),
                                       Expanded(
-                                        flex: 1,
+                                        flex: 3,
                                         child: Center(
                                           child: Row(
                                             mainAxisAlignment:
@@ -377,11 +350,11 @@ class _TableComponentState extends State<TableComponent> {
                                             children: [
                                               Image.asset(
                                                 statusIcon,
-                                                width: 16,
-                                                height: 16,
+                                                width: 15,
+                                                height: 25,
                                                 color: color,
                                               ),
-                                              const SizedBox(width: 8),
+                                              const SizedBox(width: 3),
                                               Text(
                                                 status,
                                                 style: TextStyle(
@@ -457,12 +430,12 @@ class _TableComponentState extends State<TableComponent> {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               vertical: 8.0,
-                              horizontal: 16.0,
+                              horizontal: 10.0,
                             ),
                             child: Text(
                               'Mostrando ${paginatedData.length} de ${filteredData.length} registros',
                               style: TextStyle(
-                                fontSize: 12.0,
+                                fontSize: 14.0,
                                 color: ColorsAquanova.tableText,
                               ),
                               textAlign: TextAlign.center,

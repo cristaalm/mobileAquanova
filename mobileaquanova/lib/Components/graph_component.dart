@@ -1,9 +1,8 @@
 
 // ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:mobileaquanova/assets/resources/colors.dart';
-import 'package:mobileaquanova/option.dart';
+import 'package:mobileaquanova/option/option.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class GraphComponent extends StatelessWidget {
@@ -113,15 +112,15 @@ class GraphComponent extends StatelessWidget {
                         ),
                         child: Image.asset(
                           option.iconValue,
-                          width: 20,
-                          height: 20,
+                          width: 18,
+                          height: 18,
                           color: ColorsAquanova.darkLetters,
                         ),
                       ),
                     Text(
                       option.graphText,
                       style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: ColorsAquanova.darkLetters,
                       ),
@@ -204,7 +203,7 @@ class GraphComponent extends StatelessWidget {
                         style: const TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.bold,
-                          fontSize: 12,
+                          fontSize: 10,
                         ),
                       ),
                     );

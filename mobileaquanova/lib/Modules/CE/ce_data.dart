@@ -1,12 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:mobileaquanova/assets/resources/colors.dart';
-import 'package:mobileaquanova/option.dart';
+import 'package:mobileaquanova/option/option.dart';
 
 /// pH module data
 class CeData {
-  static String getStatusForValue(double value, double rangoMin, double rangoMax) {
-    if (value < rangoMin) return "Baja";
-    if (value > rangoMax) return "Alta";
-    return "Óptima";
+
+  static ({String status, Color color}) getStatusForValue(double value, double rangoMin, double rangoMax) {
+    if (value < rangoMin) return (status: "Baja", color: ColorsAquanova.blue);
+    if (value > rangoMax) return (status: "Alta", color: ColorsAquanova.red);
+    return (status: "Óptima", color: ColorsAquanova.green);
   }
 
   static Option getOption() {
@@ -26,10 +28,13 @@ class CeData {
       rangoMin: rangoMin,
       rangoMax: rangoMax,
       currentState: getStatusForValue(
-        double.parse(value), 
-        double.parse(rangoMin), 
-        double.parse(rangoMax)
-      ),
+            double.parse(value),
+            double.parse(rangoMin),
+            double.parse(rangoMax)).status,
+        statusColor: getStatusForValue(
+          double.parse(value),
+            double.parse(rangoMin),
+            double.parse(rangoMax)).color,
       routeName: '/conductivity',
       iconTitle: 'lib/assets/icons/ce/verdeElecricity.png',
       iconValue: 'lib/assets/icons/ce/elecricity.png',
@@ -46,17 +51,17 @@ class CeData {
   // Add pH-specific methods and data
   static List<Map<String, dynamic>> getSampleHistoricalData() {
     return [
-      {"timestamp": "10/04/2025 12:00pm", "value": "750"},
-      {"timestamp": "10/04/2025 03:00pm", "value": "800"},
-      {"timestamp": "10/04/2025 06:00pm", "value": "700"},
-      {"timestamp": "11/04/2025 09:00am", "value": "900"},
-      {"timestamp": "11/04/2025 12:00pm", "value": "850"},
-      {"timestamp": "11/04/2025 03:00pm", "value": "950"},
-      {"timestamp": "11/04/2025 06:00pm", "value": "1000"},
-      {"timestamp": "12/04/2025 09:00am", "value": "1100"},
-      {"timestamp": "12/04/2025 12:00pm", "value": "1200"},
-      {"timestamp": "12/04/2025 03:00pm", "value": "1300"},
-      {"timestamp": "12/04/2025 06:00pm", "value": "1400"},
+      {"timestamp": "10/04/2025 12:00", "value": "750"},
+      {"timestamp": "10/04/2025 15:00", "value": "800"},
+      {"timestamp": "10/04/2025 18:00", "value": "700"},
+      {"timestamp": "11/04/2025 09:00", "value": "900"},
+      {"timestamp": "11/04/2025 12:00", "value": "850"},
+      {"timestamp": "11/04/2025 15:00", "value": "950"},
+      {"timestamp": "11/04/2025 18:00", "value": "1000"},
+      {"timestamp": "12/04/2025 09:00", "value": "1100"},
+      {"timestamp": "12/04/2025 12:00", "value": "1200"},
+      {"timestamp": "12/04/2025 15:00", "value": "1300"},
+      {"timestamp": "12/04/2025 18:00", "value": "1400"},
     ];
   }
 }
