@@ -17,10 +17,10 @@ class AquanovaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp( 
+      debugShowCheckedModeBanner: false,
       title: 'Aquanova',
       theme: ThemeData(
-        primaryColor: ColorsAquanova.backgroundMedium,
         scaffoldBackgroundColor: ColorsAquanova.backgroundLight,
       ),
       home: const LoginScreen(),
